@@ -76,7 +76,7 @@ console.log(addFun)
 
 ### 변수
 
-- let (added in ES6)
+- let (added in ES6) (read / write)
 
   ```javascript
   let name = 'ellie';
@@ -135,7 +135,7 @@ console.log(addFun)
 
   - var has no block scope
 
-- constant
+- constant (read only)
 
   > 한 번 선언하면 값이 절대 바뀌지 않음
 
@@ -158,14 +158,24 @@ console.log(addFun)
 - primitive type
 
   > 더이상 나눠질 수 없는 한가지의 아이템
+  >
+  > 값(value) 자체가 memory에 저장
 
   - single item: number, string, boolean, null, .undefined, symbol
+
+
+![image-20210122165956256](images/image-20210122165956256.png)
 
 - object type
 
   > single item을 묶어서 한 box로 관리할 수 있게 해주는 것
+  >
+  > reference를 통해서 실제 object를 가르키는 곳과 연결, reference가 memory에 저장
 
   - bpx cpmtaomer
+
+
+![image-20210122170047166](images/image-20210122170047166.png)
 
 - function type
 
@@ -292,3 +302,37 @@ console.log(addFun)
 
 
 ### Dynamic typing ( dynamically typed language )
+
+> 선언할 때 어떤 type인지 선언하지 않고, runtime(프로그램이 동작)할 때 프로그램에 의해 type이 변경
+
+```javascript
+let text = 'hello';
+console.log(text.charAt(0));
+# h
+console.log(`value: ${text}, type: ${typeof text}`);
+# value: hello, type: string
+text = 1;
+console.log(`value: ${text}, type: ${typeof text}`);
+# value: 1, type: number
+text = '7' + 5;
+console.log(`value: ${text}, type: ${typeof text}`);
+# value: 75, type: string
+text = '8' / '2';
+console.log(`value: ${text}, type: ${typeof text}`);
+# value: 4, type: number
+console.log(text.charAt(0));
+# error
+```
+
+
+
+
+
+### object, real-life object, data structure
+
+```javascript
+const ellie = { name: 'ellie', age: 20 };
+ellie.age = 21;
+```
+
+> ellie라는 포인터에 의해 정해진 object는 변경할 수 없지만 object안의 name과 age는 변경할 수 있다.
