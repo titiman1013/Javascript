@@ -336,3 +336,643 @@ ellie.age = 21;
 ```
 
 > ellie라는 포인터에 의해 정해진 object는 변경할 수 없지만 object안의 name과 age는 변경할 수 있다.
+
+
+
+
+
+### Operator
+
+1. String concatenation
+
+   ```javascript
+   console.log('my' + ' cat');
+   # my cat
+   console.log('1' + 2);
+   # 12
+   console.log(`string literals: 1 + 2 = ${1 + 2}`);
+   # string literals: 3
+   ```
+
+2. Numeric operators
+
+   ```javascript
+   console.log(1 + 1); // add
+   console.log(1 - 1); // substract
+   console.log(1 / 1); // divide
+   console.log(1 * 1); // multiply
+   console.log(5 % 2); // remainder
+   console.log(2 ** 3); // exponentiation
+   ```
+
+3. Increment and decrement operators
+
+   ```javascript
+   let counter = 2;
+   const preIncrement = ++counter;
+   // counter = counter + 1;
+   // preIncrement = counter;
+   
+   const postIncrement = counter++;
+   // postIncrement = counter;
+   // counter = counter + 1;
+   ```
+
+4. Assignment operators
+
+   ```javascript
+   let x = 3;
+   let y = 6;
+   x += y; // x = x + y
+   x -= y;
+   x *= y;
+   x /= y;
+   ```
+
+5. Comparison operators
+
+   ```javascript
+   console.log(10 < 6); // less than
+   console.log(10 <= 6); // less than or equal
+   console.log(10 > 6); // greater than
+   console.log(10 >= 6); // greater than or equal
+   ```
+
+6. Logical operators: || (or), && (and), ! (not)
+
+   ```javascript
+   function check() {
+       for (let i = 0; i < 10; i++) {
+           //wasting time
+           console.log('😱')
+       }
+       return true;
+   }
+   ```
+
+   - || (or)
+
+     > finds the first truthy value
+     >
+     > 하나만 true인 것을 찾으면 어차피 true이기 때문에 그 즉시 logic을 멈춘다
+     >
+     > heavy한 operation일 수록 뒤에 두는게 좋음
+
+     ```javascript
+     const value1 = true;
+     const value2 = 4 < 2; // false
+     
+     console.log(`or: ${value1 || value2 || check()}`);
+     // value1이나 value2가 true의 값이라면 check함수는 실행되지 않는다
+     # or: true
+     ```
+
+   - && (and)
+
+     > finds the first falsy value
+     >
+     > 하나만 false인 것을 찾으면 어차피 false이기 때문에 그 즉시 logic을 멈춘다
+     >
+     > heavy한 operation일 수록 뒤에 두는게 좋음
+
+     ```javascript
+     const value1 = false;
+     const value2 = 4 < 2; // false
+     
+     console.log(`and: ${value1 && value2 && check()}`);
+     // value1이나 value2가 false의 값이라면 check함수는 실행되지 않는다
+     # and: false
+     ```
+
+     - null value를 찾을 때 유용하게 사용
+
+       ```javascript
+       // nullableObject가 null이 아닐때만 something을 받아오도록 만들기
+       // nullableObject && nullableObject.something
+       if (nullableObject != null) {
+           nullableObject.something;
+       }
+       ```
+
+   - ! (not)
+
+     ```javascript
+     const value1 = true;
+     console.log(!value1);
+     # false
+     ```
+
+7. Equality
+
+   ```javascript
+   const stringFive = '5';
+   const numberFive = 5;
+   ```
+
+   - == loose equality, with type conversion
+
+     ```javascript
+     console.log(stringFive == numberFive);
+     # true
+     console.log(stringFive != numberFive);
+     # false
+     ```
+
+   - === strict equality, no type conversion
+
+     ```javascript
+     console.log(stringFive === numberFive);
+     # false
+     console.log(stringFive !== numberFive);
+     # true
+     ```
+
+   - object equality by reference
+
+     ```javascript
+     const ellie1 = { name: 'ellie' };
+     const ellie2 = { name: 'ellie' };
+     const ellie3 = ellie1;
+     console.log(ellie1 == ellie2);
+     # false
+     console.log(ellie1 === ellie2);
+     # false
+     console.log(ellie1 === ellie3);
+     # true
+     ```
+
+     ![image-20210122233835577](images/image-20210122233835577.png)
+
+   - puzzler
+
+     ```javascript
+     console.log(0 == false); // true
+     console.log(0 === false); // false
+     console.log('' == false); // true
+     console.log('' === false); // false 
+     console.log(null == undefined); // true
+     console.log(null === undefined); // false
+     ```
+
+8. Conditional operators: if
+
+   > if, else if, else
+
+   ```javascript
+   const name = 'ellie';
+   if (name === 'ellie') {
+       console.log('Welcome, Ellie!');
+   } else if (name === 'coder') {
+       console.log('You are amazing coder');
+   } else {
+       console.log('unknown');
+   }
+   ```
+
+9. Ternary operator: ?
+
+   > condition ? value1 : value2;
+   >
+   > 앞의 수식이 true라면 value1을 실행하고 아니라면 value2를 실행
+
+   ```javascript
+   console.log(name === 'ellie' ? 'yes' : 'no');
+   ```
+
+10. Switch statement
+
+    > use for multiple if checks
+    >
+    > use for enum-like value check
+    >
+    > use for multiple type checks in TS
+
+    ```javascript
+    const browser = 'IE';
+    switch (browser) {
+        case 'IE':
+            console.log('go away!');
+            break;
+        case 'Chrome':
+            console.log('love you!');
+            break;
+        case 'Firefox':
+            console.log('love you!');
+            break;
+        // case 'Chrome'과 'Firefox'의 경우 코드가 같기 때문에
+       	// case 'Chrome':
+        // case 'Firefox':
+        //     console.log('love you!');
+        //     break;
+        // 처럼 연달아 적으면 'Chrome'이나 'Firefox'일 때 실행된다
+        default:
+            console.log('same all!');
+            break;
+    }
+    ```
+
+11. Loops
+
+    - while loop
+
+      > while the condition is truthy, body code is executed
+
+      ```javascript
+      let i = 3;
+      while (i > 0) {
+          console.log(`while: ${i}`);
+          i--;
+      }
+      # while: 3
+      # while: 2
+      # while: 1
+      ```
+
+    - do while loop
+
+      > body code is executed first, then check the condition
+      >
+      > {}블럭을 실행한 뒤에 조건이 맞는지 검사한다
+
+      ```javascript
+      do {
+          console.log(`do while: ${i}`);
+          i--;
+      } while (i > 0);
+      # do while: 0
+      ```
+
+    - for loop
+
+      > for(begin; condition; step)
+
+      ```javascript
+      for (i = 3; i > 0; i--) {
+          console.log(`for: ${i}`);
+      }
+      # for: 3
+      # for: 2
+      # for: 1
+      
+      // inline variable declaration
+      // i라는 지역변수를 설정해서 시작
+      for (let i = 3; i > 0; i = i - 2) {
+          console.log(`inline variable for: ${i}`);
+      }
+      # inline variable for: 3
+      # inline variable for: 1
+      ```
+
+    - nested loops
+
+      ```javascript
+      for (let i = 0; i < 10; i++) {
+          for (let j = 0; j < 10; j++) {
+              console.log(`i: ${i}, j:${j}`);
+          }
+      }
+      ```
+
+      
+
+
+
+### Function
+
+1. Function delaration
+
+   > one function === one thing
+   >
+   > naming: doSomething, command, verb
+   >
+   > e.g. createCardAndpoint -> createCard, createPoint 
+   >
+   > 한가지의 함수는 하나의 일을 하도록 만드는 것이 좋고, 더 세분화해서 나눌 수 있는지 고민해야 한다
+   >
+   > function is object in JS
+
+   ```javascript
+   function log(message) {
+       console.log(message);
+   }
+   log('Hello@');
+   # Hello@
+   log(1234);
+   # 1234
+   ```
+
+2. Parameters
+
+   > premitive parameters: passed by value
+   >
+   > object parameters: passed by reference
+
+   ```javascript
+   function changeName(obj) {
+       obj.name = 'coder';
+   }
+   const ellie = { name: 'ellie' };
+   changeName(ellie);
+   console.log(ellie);
+   # {name: 'coder'}
+   ```
+
+3. Default parameters (added in ES6)
+
+   > 사용자가 parameter의 값을 정하지 않았을 때 default값으로 넘겨준다
+
+   ```javascript
+   function showMessage(message, from = 'unknown') {
+       console.log(`${message} by ${from}`);
+   }
+   showMessage('Hi!');
+   # Hi! by unknown
+   ```
+
+4. Rest parameters (added in ES6)
+
+   > `...args` 를 이용하여 배열의 형태로 parameter를 전달
+
+   ```javascript
+   function printAll(...args) {
+       for (let i = 0; i < args.length; i++) {
+           console.log(args[i]);
+       }
+   }
+   	// 간단한 방법
+   	for (const arg of args) {
+           console.log(arg);
+       }
+   	// 더 간단한 방법
+   	args.forEach((arg) => console.log(arg));
+   
+   print('dream', 'coding', 'ellie');
+   # dream
+   # coding
+   # ellie
+   ```
+
+5. Local scope
+
+   > 밖에서는 안이 보이지 않고, 안에서만 밖을 볼 수 있다
+   >
+   > 부모안의 variable은 자식이 확인할 수 있지만 자식안의 variable은 부모가 확인할 수 없다
+
+   ```javascript
+   let globalMessage = 'global'; // global variable
+   function printNessage() {
+       let message = 'hello'; // local variable
+       console.log(message); 
+       # hello
+       console.log(globalMessage);
+       # global
+   }
+   console.log(message)
+   # error
+   ```
+
+6. Return a value
+
+   > return 을 따로 명시해주지 않으면 기본으로 return은 undefined
+
+   ```javascript
+   function sum(a, b) {
+       return a + b;
+   }
+   const result = sun(1, 2); // 3
+   console.log(`sum: ${sum(1, 2)}`);
+   # sum: 3
+   ```
+
+7.  Early return, early exit
+
+   ```javascript
+   // bad
+   function upgradeUser(user) {
+       if (user.point > 10) {
+           // long upgrade logic...
+       }
+   }
+   
+   // good
+   function upgradeUser(user) {
+       if (user.point <= 10) {
+           return;
+       }
+       // long upgrade logic...
+   }
+   ```
+
+
+
+#### First-class function
+
+	- functions are treated like any other variable
+	- can be assigned as a value to variable
+	- can be passed as an argument to other functions
+	- can be returned by another function
+
+1. Function expression
+
+   > a function declaration can be called earlier than it is defined. (hoisted)
+   >
+   > a function expression is created when the execution reaches it
+
+   ```javascript
+   const print = function () { // anonymous function (이름이 없는 함수)
+       console.log('print');
+   };
+   print();
+   const printAgain = print; // print라는 이름없는 함수에게 printAgain이라는 `함수이름`을 정의
+   printAgain();
+   const sumAgain = sum;
+   console.log(sumAgain(1, 3));  
+   ```
+
+2. Callback function using function expression
+
+   ```javascript
+   function randomQuiz(answer, printYes, printNo) {
+       if (answer === 'love you') {
+           printYes();
+       } else {
+           printNo();
+       }
+   }
+   
+   // anonymous function
+   const printYes = function () {
+       console.log('yes!');
+   };
+   // named function
+   // better debugging in debugger's stack traces
+   // recursions
+   const printNo = function print() {
+       console.log('no!');
+   };
+   randomQuiz('wrong', printYes, printNo);
+   # no!
+   randomQuiz('love you', printYes, printNo);
+   # yes!
+   ```
+
+3. Arrow function
+
+   > always anonymous
+
+   ```javascript
+   const simplePrint = function () {
+       console.log('simplePrint!');
+   };
+   const add = function (a, b) {
+       return a + b;
+   }
+   
+   // Arrow function
+   const simplePrint = () => console.log('simplePrint!');
+   const add = (a, b) => a + b;
+   
+   // block안에서 사용할 경우 return이라는 키워드를 통해 값을 반환해줘야 한다
+   const simpleMultiply = (a, b) => {
+       // do something more
+       return a * b
+   }
+   ```
+
+4. IIFE
+
+   > Immediately Invoked Function Expression
+   >
+   > 함수 선언과 동시에 실행
+
+   ```javascript
+   (function hello() {
+       console.log('IIFE');
+   })();
+   # IIFE
+   ```
+
+
+
+
+
+### class (add in ES6)
+
+- template
+- declare once
+- no data in
+
+1. Class declarations
+
+   ```javascript
+   class Person {
+       // constructor
+       constructor(name, age) {
+           // fields
+           this.name = name;
+           this.age = age;
+       }
+      	// methods
+       speak() {
+           console.log(`${this.name}: hello!`);
+       }
+   }
+   
+   const ellie = new Person('ellie', 20);
+   console.log(ellie.name);
+   # ellie
+   console.log(ellie.age);
+   # 20
+   ellie.speak();
+   # ellie: hello!
+   ```
+
+2. Getter and setters
+
+   ```javascript
+   class User {
+       constructor(firstName, lstName, age) {
+           this.firstName = firstName;
+           this.lastName = lastName;
+           this.age = age;
+       }
+       
+       get age() {
+           return this.agePrivate;
+       }
+       
+       set age(value) {
+           // if (value < 0) {
+           //     throw Error('age can not be negative');
+           // }
+           this.agePrivate = value < 0 ? 0 : value;
+       }
+   }
+   
+   const user1 = new User('Steve', 'Job', -1);
+   console.log(user1.age);
+   # -1
+   
+   ```
+
+   ![image-20210123023927821](images/image-20210123023927821.png)
+
+3. Fields (public, private)
+
+   > Too soon!
+   >
+   > class 내부에서만 값이 보여지고 변경이 가능
+   >
+   > class 외부에서는 값을 변경, 접근할 수 없다
+
+   ```javascript
+   class Experiment {
+       publicField = 2;
+   	#privateField = 0;
+   }
+   const experiment = new Experiment();
+   console.log(experiment.publicField);
+   console.log(experiment.privateField);
+   ```
+
+4. Static properties and methods
+
+   > Too soon!
+   >
+   > class 자체에 값을 할당하고 instance생성시 복제하는 개념
+   >
+   > object에 상관없이, 들어오는 data에 상관없이 공통적으로 class에서 쓸 수 있는 것이라면 static과 static method를 사용하여 작성하는 것이 memory의 사용을 줄여준다
+
+   ```javascript
+   class Article {
+       static publisher = 'Dream Coding';
+       constructor(articleNumber) {
+           this.articleNumber = articleNumber;
+       }
+   
+       static printPublisher() {
+           console.log(Article.publisher);
+       }
+   }
+   
+   const article1 = new Article(1);
+   const article2 = new Article(2);
+   console.log(article1.publisher);
+   # undefined
+   console.log(Article.publisher);
+   # Dream Coding
+   Article.printPublisher();
+   # Dream Coding
+   ```
+
+5. 
+
+
+
+
+
+### object
+
+- instance of a class
+- created many times
+- data in
